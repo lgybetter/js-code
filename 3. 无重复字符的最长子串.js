@@ -1,33 +1,20 @@
 var lengthOfLongestSubstring = function (s) {
-  let arr = []
-  let last = []
-  let map = {}
-  for (let i = 0; i < s.length; i++) {
-    if (map[s[i]] === 1) {
-      if (s[i - 1]) {
-        last.push(s[i - 1])
-        arr.push(map)
-        map = {}
-      }
-    }
-    map[s[i]] = 1
-    if (i === s.length - 1) {
-      arr.push(map)
-    }
-  }
+  let num = 0;
+  let str = '';
   let max = 0
-  for (let i = 0; i < arr.length; i++) {
-    let pre = last[i - 1] || ''
-    let count = Object.keys(arr[i]).length
-    if (pre && !arr[i][pre]) {
-      count += 1
-    }
-    if (count > max) {
-      max = count
+  for (let item of s) {
+    let index = str.indexOf(item)
+    str += item
+    if (index === -1) {
+      num++
+      max = max > num ? max : num
+    } else {
+      str = str.slice(index + 1)
+      num = str.length
     }
   }
   return max
 }
 
-let res = lengthOfLongestSubstring("anviaj")
+let res = lengthOfLongestSubstring("pwwkew")
 console.log(res)
